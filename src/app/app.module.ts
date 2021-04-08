@@ -4,6 +4,7 @@ import {AdmissionModule} from './admission/admission.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ParentCornerModule } from './parent-corner/parent-corner.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AdmissionModule
+    AdmissionModule,
+    ParentCornerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

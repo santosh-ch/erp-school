@@ -11,7 +11,8 @@ export interface Student {
     name: string,
     age: number,
     standard: number,
-    dob: Date
+    dob: Date,
+    percentage?: number
 }
 
 
@@ -19,11 +20,12 @@ export const StudentDefault: Student = {
     name: "",
     age: 0,
     standard: 0,
-    dob: new Date()
+    dob: new Date(),
+    percentage: 0
 }
 
 export const AdmissionDefault: Admission = {
-    student: {...StudentDefault},
+    student: { ...StudentDefault },
     branch: "",
     expectedDOJ: new Date(),
     prevSchool: "",

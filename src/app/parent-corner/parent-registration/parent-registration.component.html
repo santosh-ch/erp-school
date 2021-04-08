@@ -1,0 +1,64 @@
+<h2>Parent Registration</h2>
+<div class="float-right">
+    <span>{{currentDate|date:'MM/dd/yy hh:mm:ss'}}</span>
+</div>
+
+<form method="POST">
+    <div class="input-group">
+        <label for="pdname">Name *</label>
+        <div>
+            <input type="text" id="pdname" name="pdname" [(ngModel)]="parentDetail.name" />
+            &nbsp;
+            {{parentDetail.name|uppercase}}
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdstname">Student's Name *</label>
+        <div>
+            <input type="text" id="pdstname" name="pdstname" [(ngModel)]="parentDetail.student.name" />
+            &nbsp;
+            {{parentDetail.student.name|lowercase}}
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdstage">Student's age *</label>
+        <div>
+            <input type="number" id="pdstage" name="pdstage" [(ngModel)]="parentDetail.student.age" />
+            &nbsp;
+            {{parentDetail.student.age|number:'3.2-4'}}
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdstpercent">Student's percentage</label>
+        <div>
+            <input type="number" id="pdstpercent" name="pdstpercent" [(ngModel)]="parentDetail.student.percentage" />
+            &nbsp;
+            {{parentDetail.student.percentage|percent:'2.2-4'}}
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdadd">Address</label>
+        <div>
+            <input type="text" id="pdadd" name="pdadd" [(ngModel)]="parentDetail.address" />
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdadmiss">Admission Fee *</label>
+        <div>
+            <input type="text" id="pdadmiss" name="pdadmiss" [(ngModel)]="parentDetail.admissionFee" />
+            &nbsp;
+            {{parentDetail.admissionFee|currency:'INR'}}
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="pdterm">Term Fee *</label>
+        <div>
+            <input type="text" id="pdterm" name="pdterm" [(ngModel)]="parentDetail.termFee" />
+            &nbsp;
+            {{parentDetail.admissionFee|currency:'INR':'code'}}
+        </div>
+    </div>
+    <button type="submit">Register</button>
+    <br/>{{parentDetail|json}}
+    <br/>{{['Mahesh','Suresh','Rajesh','Brijesh']|slice:1:3}}
+</form>
