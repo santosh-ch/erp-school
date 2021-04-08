@@ -1,0 +1,95 @@
+<h2>Admission Form</h2>
+
+<form method="POST">
+    <div [ngClass]="isRequired?'required':''" [ngStyle]="{'margin':isStudentProp?'10px':'0'}">
+        <label for="stname">Student Name *</label>
+        <div>
+            <input type="text" id="stname" name="stname" autocomplete="off" [required]="isRequired"
+                [(ngModel)]="admission.student.name" />
+        </div>
+
+    </div>
+
+    <div [ngStyle]="{'margin':isStudentProp?'10px':'0'}">
+        <label for="stage">Student Age</label>
+        <div>
+            <input type="number" id="stage" name="stage" autocomplete="off" [(ngModel)]="admission.student.age" />
+        </div>
+    </div>
+
+    <div [ngStyle]="{'margin':isStudentProp?'10px':'0'}">
+        <label for="stclass">Student Class</label>
+        <div>
+            <input type="number" id="stclass" name="stclass" autocomplete="off"
+                [(ngModel)]="admission.student.standard" />
+        </div>
+    </div>
+
+    <div [ngStyle]="{'margin':isStudentProp?'10px':'0'}">
+        <label for="stdob">Student DOB</label>
+        <div>
+            <input type="date" id="stdob" name="stdob" autocomplete="off" [(ngModel)]="admission.student.dob" />
+        </div>
+    </div>
+
+    <div [ngClass]="isRequired?'required':''">
+        <label for="stgaurdian">Gaurdian/Parent Name *</label>
+        <div>
+            <input type="text" id="stgaurdian" name="stgaurdian" autocomplete="off" [required]="isRequired"
+                [(ngModel)]="admission.gaurdian" />
+        </div>
+    </div>
+
+    <div *ngIf="admission.gaurdian">
+        <label for="referredby">Referred By Method</label>
+        <div>
+            <!-- <input type="text" id="referredby" name="referredby" autocomplete="off" [(ngModel)]="admission.referredBy" /> -->
+            <select id="referredby" name="referredby" [(ngModel)]="admission.referredBy">
+                <option *ngFor="let ref of referredByMethods" [value]="ref.id">{{ref.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div *ngIf="admission.student?(admission.student.standard>0):false">
+        <label for="prevschool">Previous School Name</label>
+        <div>
+            <input type="text" id="prevschool" name="prevschool" autocomplete="off"
+                [(ngModel)]="admission.prevSchool" />
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <button type="submit" (click)="admissionSubmit()">Submit</button>
+    </div>
+
+</form>
+
+<!-- {{admission|json}} -->
+<table border="1">
+    <thead>
+        <tr>
+            <td>Student Name</td>
+            <td>Student Age</td>
+            <td>Student Class</td>
+            <td>Gaurdian Name</td>
+            <td>Referred By Method</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let admis of admissions">
+            <td>{{admis.student.name}}</td>
+            <td>{{admis.student.age}}</td>
+            <td>{{admis.student.standard}}</td>
+            <td>{{admis.gaurdian}}</td>
+            <!-- <td>{{admis.referredBy}}</td> -->
+            <td [ngSwitch]="admis.referredBy">
+                <div *ngFor="let rm of referredByMethods">
+                    <label *ngSwitchCase="rm.id">{{rm.name}}</label>
+                </div>
+                <label *ngSwitchDefault>Other</label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<label ngNonBindable>We are doing interpolation binding on student Name using {{admission.student.name}}</label>
