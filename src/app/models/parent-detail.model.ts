@@ -1,4 +1,4 @@
-import { Student, StudentDefault } from "./admission.model";
+import { Student, StudentDefault } from "./student.model";
 
 export interface ParentDetail {
     name: string,

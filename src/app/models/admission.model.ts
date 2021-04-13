@@ -1,3 +1,5 @@
+import { Student, StudentDefault } from "./student.model";
+
 export interface Admission {
     student: Student,
     branch?: string,
@@ -5,23 +7,6 @@ export interface Admission {
     expectedDOJ?: Date,
     prevSchool?: string,
     gaurdian: string
-}
-
-export interface Student {
-    name: string,
-    age: number,
-    standard: number,
-    dob: Date,
-    percentage?: number
-}
-
-
-export const StudentDefault: Student = {
-    name: "",
-    age: 0,
-    standard: 0,
-    dob: new Date(),
-    percentage: 0
 }
 
 export const AdmissionDefault: Admission = {

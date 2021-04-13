@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Admission, AdmissionDefault, StudentDefault } from '../../models/admission.model';
+import { StudentDefault } from 'src/app/models/student.model';
+import { Admission, AdmissionDefault } from '../../models/admission.model';
 
 @Component({
   selector: 'app-admission-form',

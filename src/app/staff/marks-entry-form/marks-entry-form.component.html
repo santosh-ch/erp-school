@@ -1,0 +1,93 @@
+<h2>
+    Student Marks Entry
+</h2>
+<div >
+<form method="POST" #marksEntry="ngForm" (ngSubmit)="submit()">
+    <div>
+        <label for="stname">Student Name *:</label>
+        <div>
+            <input type="text" id="stname" name="stname" [(ngModel)]="student.name" required pattern="[A-Za-z ]*$"
+                maxlength="20" minlength="5" />
+            <div *ngIf="marksEntry.form.controls.stname.touched && marksEntry.form.controls.stname.invalid">
+                <label class="error-text" *ngIf="marksEntry.form.controls.stname?.errors?.required">Name is a mandatory
+                    field.</label>
+                <label class="error-text" *ngIf="marksEntry.form.controls.stname?.errors?.pattern">Name only allows
+                    alphabets.</label>
+                <label class="error-text" *ngIf="marksEntry.form.controls.stname?.errors?.minlength">Name should contain a minimum 5 characters.</label>
+                <label class="error-text" *ngIf="marksEntry.form.controls.stname?.errors?.maxlength">Name allows a maximum of 20 characters.</label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="stclass">Student Class *:</label>
+        <div>
+            <input type="text" id="stclass" name="stclass" #standard="ngModel" [(ngModel)]="student.standard" required pattern="\d*$" />
+            <div *ngIf="marksEntry.form.controls.stclass.touched && marksEntry.form.controls.stclass.invalid">
+                <label class="error-text" *ngIf="marksEntry.form.controls.stclass?.errors?.required">Class is a mandatory
+                    field.</label>
+                <label class="error-text" *ngIf="marksEntry.form.controls.stclass?.errors?.pattern">Class only allows
+                    numbers.</label>
+            </div>
+        </div>
+    </div>
+    <div class="marks-entry">
+        <h3>Marks Entry</h3>
+        <div>
+            <label for="stmrkmath">Maths *:</label>
+            <div>
+                <input type="text" id="stmrkmath" name="stmrkmath" [(ngModel)]="student.score.maths" required pattern="\d*$"/>
+                <div *ngIf="marksEntry.form.controls.stmrkmath.touched && marksEntry.form.controls.stmrkmath.invalid">
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrkmath?.errors?.required">Mark is a mandatory
+                        field.</label>
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrkmath?.errors?.pattern">Mark only allows
+                        numbers.</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="stmrksci">Science *:</label>
+            <div>
+                <input type="text" id="stmrksci" name="stmrksci" [(ngModel)]="student.score.science" required pattern="\d*$"/>
+                <div *ngIf="marksEntry.form.controls.stmrksci.touched && marksEntry.form.controls.stmrksci.invalid">
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrksci?.errors?.required">Mark is a mandatory
+                        field.</label>
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrksci?.errors?.pattern">Mark only allows
+                        numbers.</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="stmrksoc">Social *:</label>
+            <div>
+                <input type="text" id="stmrksoc" name="stmrksoc" [(ngModel)]="student.score.social" required pattern="\d*$"/>
+                <div *ngIf="marksEntry.form.controls.stmrksoc.touched && marksEntry.form.controls.stmrksoc.invalid">
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrksoc?.errors?.required">Mark is a mandatory
+                        field.</label>
+                    <label class="error-text" *ngIf="marksEntry.form.controls.stmrksoc?.errors?.pattern">Mark only allows
+                        numbers.</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" [disabled]="marksEntry.invalid">Submit</button>
+        <button type="button" (click)="reset()">Cancel</button>
+    </div>
+
+    <!-- {{marksEntry.value|json}}
+    <br /> Pristine {{marksEntry.form.controls.stname.pristine|json}}
+    <br /> dirty {{marksEntry.form.controls.stname.dirty|json}}
+    <br /> touched {{marksEntry.form.controls.stname.touched|json}}
+    <br /> untouched {{marksEntry.form.controls.stname.untouched|json}}
+    <br /> valid {{marksEntry.form.controls.stname.valid|json}}
+    <br /> invalid {{marksEntry.form.controls.stname.invalid|json}}
+    <br /> errors {{marksEntry.form.controls.stname?.errors|json}} -->
+    <!-- {{standard.control.pristine|json}}
+    {{standard.control.touched|json}} -->
+
+</form>
+<label *ngIf="student.score.total">
+{{studentObj.name}} has secured a total of {{studentObj.score.total}} in class {{studentObj.standard}}.
+</label>
+</div>

@@ -55,8 +55,10 @@
         <div>
             <input type="text" id="pdterm" name="pdterm" [(ngModel)]="parentDetail.termFee" />
             &nbsp;
-            {{parentDetail.admissionFee|currency:'INR':'code'}}
+            {{parentDetail.termFee|currency:'INR':'code'}}
         </div>
+        <br/>
+       Total Fee : {{""|feeTotal:parentDetail.admissionFee.toString():parentDetail.termFee.toString()}}
     </div>
     <button type="submit">Register</button>
     <br/>{{parentDetail|json}}
