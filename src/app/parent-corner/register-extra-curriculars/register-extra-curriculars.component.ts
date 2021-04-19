@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Student, StudentDefault } from 'src/app/models/student.model';
 
 @Component({
   selector: 'app-register-extra-curriculars',
@@ -9,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegisterExtraCurricularsComponent implements OnInit {
 
   regForm: FormGroup;
+  ecActivities: string[] = [];
+  students: Student[] = [];
   constructor() {
     this.regForm = new FormGroup({
       fullName: new FormGroup({
@@ -22,6 +25,25 @@ export class RegisterExtraCurricularsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ecActivities = ["Running", "Skating", "Swimming", "Theater", "Hockey"];
+    let studentsJSON: string | null = localStorage.getItem("ec_students");
+    this.students = studentsJSON ? JSON.parse(studentsJSON) : [];
+  }
+
+  submit() {
+    let self = this,
+      currentStudent = { ...StudentDefault };
+    if (self.regForm.valid) {
+      debugger;
+      currentStudent.name = self.regForm.get('fullName.firstName')?.value +
+        (self.regForm.get('fullName.lastName')?.value ? (" " + self.regForm.get('fullName.lastName')?.value) : "").toString();
+      currentStudent.gaurdian = self.regForm.controls.parentName.value;
+      currentStudent.age = self.regForm.controls.age.value;
+      currentStudent.activities = self.regForm.controls.activities.value;
+      self.students.push(currentStudent);
+      localStorage.setItem("ec_students", JSON.stringify(self.students));
+      self.regForm.reset();
+    }
   }
 
 }

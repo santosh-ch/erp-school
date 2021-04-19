@@ -1,10 +1,13 @@
 export interface Student {
+    id: number,
     name: string,
     age: number,
     standard: number,
     dob: Date,
     percentage?: number,
     score: Score,
+    activities?: string,
+    gaurdian: string
 }
 
 interface Score {
@@ -21,10 +24,12 @@ export const scoreDefault: Score = {
 }
 
 export const StudentDefault: Student = {
+    id: 0,
     name: "",
     age: 0,
     standard: 0,
     dob: new Date(),
     percentage: 0,
-    score: {...scoreDefault}
+    gaurdian: "",
+    score: { ...scoreDefault }
 }

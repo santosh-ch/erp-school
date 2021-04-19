@@ -2,22 +2,31 @@
     <h2>
         Register Extra Curricular Activities
     </h2>
-    <form [formGroup]="regForm" class="col-md-6">
+    <form [formGroup]="regForm" class="col-md-6" (ngSubmit)="submit()">
         <fieldset formGroupName="fullName">
-            <div class="form-group">
-                <label for="stdfname">First Name</label>
-                <input type="text" placeholder="First Name" formControlName="firstName" class="form-control" id="stdfname" />
+            <div class="form-group"
+                [ngClass]="{'has-error':regForm.get('fullName.firstName')?.touched && regForm.get('fullName.firstName')?.invalid}">
+                <label for="stdfname">First Name *</label>
+                <input type="text" placeholder="First Name" formControlName="firstName" class="form-control"
+                    id="stdfname" />
+                <div class="form-group-feedback"
+                    *ngIf="regForm.get('fullName.firstName')?.touched && regForm.get('fullName.firstName')?.invalid">
+                    <label *ngIf="regForm.get('fullName.firstName')?.errors?.required">First Name is a required
+                        field.</label>
+                </div>
             </div>
             <div class="form-group">
-                <label for="stdlname">Last Name</label>
+                <label for="stdlname">Last Name *</label>
                 <input type="text" formControlName="lastName" class="form-control" id="stdlname" />
             </div>
         </fieldset>
-        <div class="form-group" [ngClass]="{'has-error':regForm.controls.parentName.touched && regForm.controls.parentName.invalid}">
+        <div class="form-group"
+            [ngClass]="{'has-error':regForm.controls.parentName.touched && regForm.controls.parentName.invalid}">
             <label for="pname">Parent Name *</label>
             <input type="text" formControlName="parentName" class="form-control" id="pname" />
-            <div class="form-group-feedback" *ngIf="regForm.controls.parentName.touched && regForm.controls.parentName.invalid">
-                <label *ngIf="regForm.controls.parentName?.errors?.required">Parent Name is required field.</label>
+            <div class="form-group-feedback"
+                *ngIf="regForm.controls.parentName.touched && regForm.controls.parentName.invalid">
+                <label *ngIf="regForm.controls.parentName?.errors?.required">Parent Name is a required field.</label>
             </div>
         </div>
         <div class="form-group" [ngClass]="{'has-error':regForm.controls.age.touched && regForm.controls.age.invalid}">
@@ -29,20 +38,49 @@
                 <label *ngIf="regForm.controls.age?.errors?.max">Age should be less than 15.</label>
             </div>
         </div>
-        <div class="form-group" [ngClass]="{'has-error':regForm.controls.activities.touched && regForm.controls.activities.invalid}">
+        <div class="form-group"
+            [ngClass]="{'has-error':regForm.controls.activities.touched && regForm.controls.activities.invalid}">
             <label for="stact">Activities *</label>
-            <input type="text" formControlName="activities" class="form-control" id="stact" />
-            <div class="form-group-feedback" *ngIf="regForm.controls.activities.touched && regForm.controls.activities.invalid">
+            <input type="text" formControlName="activities" list="ecactivities" class="form-control" id="stact"
+                autocomplete="off" />
+            <datalist id="ecactivities">
+                <option *ngFor="let act of ecActivities">
+                    {{act}}
+                </option>
+            </datalist>
+            <div class="form-group-feedback"
+                *ngIf="regForm.controls.activities.touched && regForm.controls.activities.invalid">
                 <label *ngIf="regForm.controls.activities?.errors?.required">Activities is required field.</label>
-                <label *ngIf="regForm.controls.activities?.errors?.minlength">Activities Field should have more than 5 characters.</label>
-                <label *ngIf="regForm.controls.activities?.errors?.maxlength">Activities Field should have less than 20 characters.</label>
+                <label *ngIf="regForm.controls.activities?.errors?.minlength">Activities Field should have more than 5
+                    characters.</label>
+                <label *ngIf="regForm.controls.activities?.errors?.maxlength">Activities Field should have less than 20
+                    characters.</label>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    {{regForm.value|json}}
+    <!-- {{regForm.value|json}} -->
     <!-- {{regForm.controls.fullName.|json}} -->
-   <br/> {{regForm.controls.parentName?.errors|json}}
-   <br/> {{regForm.controls.age?.errors|json}}
-   <br/>{{regForm.controls.activities?.errors|json}}
+    <!-- <br /> {{regForm.controls.parentName?.errors|json}}
+    <br /> {{regForm.controls.age?.errors|json}}
+    <br />{{regForm.controls.activities?.errors|json}}
+    <br />{{regForm.get('fullName.firstName')?.pristine|json}} -->
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>ParentName</th>
+                <th>Age</th>
+                <th>Activities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td>{{student.name}}</td>
+                <td>{{student.gaurdian}}</td>
+                <td>{{student.age}}</td>
+                <td>{{student.activities}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
