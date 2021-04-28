@@ -9,4 +9,21 @@
             <li><a [routerLink]="['/home','admission','schoolfaq']">FAQ's</a></li>
         </ul>
     </li>
+    <li>
+        <h3>Parent Corner</h3>
+        <ul>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/home','parentcorner','parentreg']">Parent
+                Registration</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['/home','parentcorner','registerec']">Register
+                for
+                Activities</a></li>
+        </ul>
+    </li>
+    <li>
+        <h3>Staff</h3>
+        <ul>
+            <li [routerLinkActive]="['active']"><a [routerLink]="['/home','staff','marksentry']">Marks Entry</a>
+            </li>
+        </ul>
+    </li>
 </ul>

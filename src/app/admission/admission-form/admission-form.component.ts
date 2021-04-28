@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StudentDefault } from 'src/app/models/student.model';
 import { Admission, AdmissionDefault } from '../../models/admission.model';
 
@@ -18,7 +19,7 @@ export class AdmissionFormComponent implements OnInit, OnDestroy {
   isStudentProp: boolean = true;
   referredByMethods: { id: number, name: string }[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.referredByMethods = [{ id: 1, name: "News Paper - default" },
@@ -30,6 +31,9 @@ export class AdmissionFormComponent implements OnInit, OnDestroy {
   }
 
   admissionSubmit(): void {
+    let studentId = Math.round(Math.random() * 100000),
+      parentName = this.admission.gaurdian;
+    this.admission.student.id = studentId;
     this.admissions.push({
       student: { ...this.admission.student },
       gaurdian: this.admission.gaurdian,
@@ -38,6 +42,7 @@ export class AdmissionFormComponent implements OnInit, OnDestroy {
     this.admission = { ...AdmissionDefault };
     this.admission.student = { ...StudentDefault };
     localStorage.setItem("admissions", JSON.stringify(this.admissions));
+    this.router.navigate(["/home", 'parentcorner', 'parentreg', studentId])
   }
 
   ngOnDestroy() {

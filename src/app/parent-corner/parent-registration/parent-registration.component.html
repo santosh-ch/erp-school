@@ -3,7 +3,7 @@
     <span>{{currentDate|date:'MM/dd/yy hh:mm:ss'}}</span>
 </div>
 
-<form method="POST">
+<form method="POST" (ngSubmit)="submit()">
     <div class="input-group">
         <label for="pdname">Name *</label>
         <div>
@@ -60,7 +60,7 @@
         <br/>
        Total Fee : {{""|feeTotal:parentDetail.admissionFee.toString():parentDetail.termFee.toString()}}
     </div>
-    <button type="submit">Register</button>
-    <br/>{{parentDetail|json}}
-    <br/>{{['Mahesh','Suresh','Rajesh','Brijesh']|slice:1:3}}
+    <button type="submit">Register & Continue</button>
+    <!-- <br/>{{parentDetail|json}}
+    <br/>{{['Mahesh','Suresh','Rajesh','Brijesh']|slice:1:3}} -->
 </form>

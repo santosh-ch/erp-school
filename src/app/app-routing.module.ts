@@ -5,12 +5,15 @@ import { SchoolFaqsComponent } from './admission/school-faqs/school-faqs.compone
 import { HomeComponent } from './home/home.component';
 import { ParentRegistrationComponent } from './parent-corner/parent-registration/parent-registration.component';
 import { RegisterExtraCurricularsComponent } from './parent-corner/register-extra-curriculars/register-extra-curriculars.component';
+import { FormDeactivateGuard } from './shared/services/gaurds/form-deactivate.guard';
+import { LoggedInUserGaurdService } from './shared/services/gaurds/logged-in-user-gaurd.service';
+import { ParentUserGuard } from './shared/services/gaurds/parent-user.guard';
 import { MarksEntryFormComponent } from './staff/marks-entry-form/marks-entry-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'home', children: [
+    path: 'home', canActivate: [LoggedInUserGaurdService], children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
         path: 'admission', children: [
@@ -19,10 +22,11 @@ const routes: Routes = [
           { path: 'schoolfaq', component: SchoolFaqsComponent }]
       },
       {
-        path: 'parentcorner', children: [
+        path: 'parentcorner', canActivateChild: [ParentUserGuard], children: [
           { path: '', redirectTo: 'parentreg', pathMatch: 'full' },
           { path: 'parentreg', component: ParentRegistrationComponent },
-          { path: 'registerec', component: RegisterExtraCurricularsComponent }]
+          { path: 'parentreg/:id', component: ParentRegistrationComponent },
+          { path: 'registerec/:id', canDeactivate: [FormDeactivateGuard], component: RegisterExtraCurricularsComponent }]
       },
       {
         path: 'staff', children: [
